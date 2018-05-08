@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-// CityHash Version 1, by Geoff Pike and Jyrki Alakuijala
+// CityHash Version 1.0.2, by Geoff Pike and Jyrki Alakuijala
 //
 // This file provides CityHash64() and related functions.
 //
@@ -210,8 +210,9 @@ static uint128 CityMurmur(const char *s, size_t len, uint128 seed) {
   uint64 d = 0;
   ssize_t l = len - 16;
   if (l <= 0) {  // len <= 16
+    a = ShiftMix(a * k1) * k1;
     c = b * k1 + HashLen0to16(s, len);
-    d = Rotate(a + (len >= 8 ? UNALIGNED_LOAD64(s) : c), 32);
+    d = ShiftMix(a + (len >= 8 ? UNALIGNED_LOAD64(s) : c));
   } else {  // len > 16
     c = HashLen16(UNALIGNED_LOAD64(s + len - 8) + k1, a);
     d = HashLen16(b + len, c + UNALIGNED_LOAD64(s + len - 16));
