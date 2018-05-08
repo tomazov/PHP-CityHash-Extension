@@ -2,7 +2,7 @@
 #define PHP_CITYHASH_H
 
 #define PHP_CITYHASH_EXTNAME  "cityhash"
-#define PHP_CITYHASH_EXTVER   "1.0"
+#define PHP_CITYHASH_EXTVER   "1.0.2"
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
